@@ -9,13 +9,15 @@ interface VideoCardProps {
   isActive?: boolean;
   onClick: () => void;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const VideoCard: React.FC<VideoCardProps> = ({
   video,
   isActive = false,
   onClick,
-  className
+  className,
+  style
 }) => {
   // Format view count for display
   const formatViews = (views: number): string => {
@@ -37,6 +39,7 @@ const VideoCard: React.FC<VideoCardProps> = ({
         isActive && "bg-widget-muted border-l-4 border-widget-accent",
         className
       )}
+      style={style}
     >
       {/* Thumbnail */}
       <div className="relative w-24 h-16 shrink-0 overflow-hidden rounded-md">

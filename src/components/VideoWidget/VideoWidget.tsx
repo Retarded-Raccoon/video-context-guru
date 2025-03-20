@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { useVideoRecommendations } from '@/hooks/useVideoRecommendations';
 import { useDraggable } from '@/hooks/useDraggable';
@@ -21,7 +21,10 @@ const VideoWidget: React.FC<VideoWidgetProps> = ({
   const [isOpen, setIsOpen] = useState(true);
   const [searchTerm, setSearchTerm] = useState(initialContext);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
-
+  
+  // Create separate refs for the widget and the button
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  
   // Setup draggable behavior
   const { position, elementRef, handleMouseDown } = useDraggable({
     initialPosition: { x: 20, y: 20 },
@@ -82,7 +85,7 @@ const VideoWidget: React.FC<VideoWidgetProps> = ({
   if (!isOpen) {
     return (
       <button
-        ref={elementRef}
+        ref={buttonRef}
         style={{
           position: 'fixed',
           left: `${position.x}px`,
